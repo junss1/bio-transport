@@ -4,10 +4,12 @@
   <name>bio_transport</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="wndyd293@gmail.com">gom</maintainer>
+  <maintainer email="junss3539@naver.com">junss1</maintainer>
   <license>Apache-2.0</license>
 
   <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>bio_transport_interfaces</depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>

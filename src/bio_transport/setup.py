@@ -20,7 +20,7 @@ setup(
         # 런치 파일 등록
         (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.py'))),
         # config yaml 설치 등록
-        (os.path.join('share', package_name, 'config'), glob(os.path.join('config', '*.yaml'))),
+        #(os.path.join('share', package_name, 'config'), glob(os.path.join('config', '*.yaml'))),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

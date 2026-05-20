@@ -1,7 +1,7 @@
 # bio-transport-automation
 
 [![Demo Video](docs/bio-transport-automation.png)](https://youtu.be/qSOLFy9Ex48)
-이미지 클릭 시 영상 재성
+이미지 클릭 시 영상 재생
 
 바이오뱅크 워크셀에서 **랙(RACK) 이송**과 **튜브(TUBE) 이송**을 ROS 2 Action 기반으로 통합 제어하는 프로젝트입니다.
 

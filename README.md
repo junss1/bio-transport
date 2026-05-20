@@ -63,23 +63,30 @@ bio-transport/
 
 이 저장소에는 `doosan-robot2`를 포함하지 않습니다.
 
-같은 ROS 2 워크스페이스의 `src/` 폴더에 별도로 설치해야 합니다.
+`doosan-robot2`는 실행 환경에서 외부 의존성으로 설치합니다.
+
+프로젝트 루트의 `src/` 폴더에 별도로 설치해야 합니다.
 
 ```bash
-cd ~/ros2_ws/src
+cd bio-transport/src
 git clone -b humble https://github.com/DoosanRobotics/doosan-robot2.git
 ```
 
-최종 워크스페이스 구조 예시는 다음과 같습니다.
+최종 프로젝트 구조 예시는 다음과 같습니다.
 
 ```text
-ros2_ws/
+bio-transport/
+├── README.md
+├── requirements.txt
+├── .gitignore
+├── LICENSE
+├── docs/
+│   ├── Flow_chart.png
+│   ├── bio-transport-automation.png
+│   └── archive/
 └── src/
-    ├── bio-transport/
-    │   ├── docs/
-    │   └── src/
-    │       ├── bio_transport/
-    │       └── bio_transport_interfaces/
+    ├── bio_transport/
+    ├── bio_transport_interfaces/
     └── doosan-robot2/
 ```
 
@@ -168,44 +175,39 @@ ROS 2 Action 정의 패키지입니다.
 source /opt/ros/humble/setup.bash
 ```
 
-### 8-2. 워크스페이스 생성
+### 8-2. 프로젝트 클론
 
 ```bash
-mkdir -p ~/ros2_ws/src
-cd ~/ros2_ws/src
+git clone https://github.com/junss1/bio-transport.git
+cd bio-transport
 ```
 
 ### 8-3. Doosan ROS 2 패키지 설치
 
+`doosan-robot2`는 이 저장소에 포함하지 않고, 실행 환경에서 외부 의존성으로 설치합니다.
+
 ```bash
+cd src
 git clone -b humble https://github.com/DoosanRobotics/doosan-robot2.git
+cd ..
 ```
 
-### 8-4. 이 프로젝트 클론
+### 8-4. Python 의존성 설치
 
 ```bash
-cd ~/ros2_ws/src
-git clone https://github.com/junss1/bio-transport.git
-```
-
-### 8-5. Python 의존성 설치
-
-```bash
-cd ~/ros2_ws/src/bio-transport
 pip install -r requirements.txt
+```
+
+### 8-5. 의존성 설치
+
+```bash
+rosdep install -r --from-paths src --ignore-src --rosdistro humble -y
 ```
 
 ### 8-6. 빌드
 
-중요: 실제 ROS 2 패키지는 저장소 내부의 `src/` 폴더에 있습니다. 따라서 `colcon build` 실행 시 패키지 경로를 명시합니다.
-
 ```bash
-cd ~/ros2_ws
-rosdep install -r --from-paths src --ignore-src --rosdistro humble -y
-
-colcon build --symlink-install \
-  --base-paths src/bio-transport/src src/doosan-robot2
-
+colcon build --symlink-install
 source install/setup.bash
 ```
 

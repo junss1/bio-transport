@@ -38,6 +38,7 @@ bio-transport/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
+├── LICENSE
 ├── docs/
 │   ├── Flow_chart.png
 │   ├── bio-transport-automation.png
@@ -190,7 +191,7 @@ git clone https://github.com/junss1/bio-transport.git
 ### 8-5. Python 의존성 설치
 
 ```bash
-cd ~/ros2_ws/src/bio-transport-automation
+cd ~/ros2_ws/src/bio-transport
 pip install -r requirements.txt
 ```
 
@@ -302,3 +303,10 @@ EMERGENCY,STOP,NONE,NONE
 - `bio_sub`는 Doosan Robot Python API 사용을 전제로 합니다.
 - 실제 로봇 모드에서는 로봇 IP, 네트워크 연결, 안전 설정을 현장 환경에 맞게 확인해야 합니다.
 ```
+
+
+---
+
+## License
+
+This project is licensed under the Apache License 2.0.

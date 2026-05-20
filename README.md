@@ -1,7 +1,8 @@
 # bio-transport-automation
 
 [![Demo Video](docs/bio-transport-automation.png)](https://youtu.be/qSOLFy9Ex48)
-이미지 클릭 시 영상 재생
+
+이미지 클릭 시 데모 영상을 확인할 수 있습니다.
 
 바이오뱅크 워크셀에서 **랙(RACK) 이송**과 **튜브(TUBE) 이송**을 ROS 2 Action 기반으로 통합 제어하는 프로젝트입니다.
 
@@ -118,7 +119,7 @@ ROS 2 Action 정의 패키지입니다.
 
 ---
 
-## 6. 시스템 흐름
+## 6. 시스템 FLOW
 
 1. UI에서 작업 명령을 입력합니다.
 2. `bio_main`이 명령 타입을 판별하고 유효성을 검사합니다.
@@ -130,57 +131,87 @@ ROS 2 Action 정의 패키지입니다.
 
 ---
 
-## 7. 설치 및 빌드
+## 7. Technical Highlights
 
-### 7-1. ROS 2 환경 로드
+### 7-1. Command Parsing and Dispatch
+
+- UI 입력 명령을 `RACK`, `TUBE`, `HOME`, `EMERGENCY` 유형으로 분류합니다.
+- 명령 형식과 목적지 정보를 검증한 뒤 적절한 작업 흐름으로 전달합니다.
+- 메인 오케스트레이터가 작업 상태를 관리하며 순차적으로 명령을 처리합니다.
+
+### 7-2. Station-Based Coordinate Resolution
+
+- 랙과 튜브 위치를 사전 정의된 스테이션 테이블 기준으로 해석합니다.
+- 위치 이름을 실제 접근 좌표와 작업 좌표로 변환합니다.
+- 서로 다른 작업 위치를 동일한 명령 형식으로 처리할 수 있습니다.
+
+### 7-3. Action-Oriented Task Sequencing
+
+- 상위 노드는 `RobotMove`, `TubeTransport`, `BioCommand` 액션을 통해 작업을 요청합니다.
+- 하위 제어 노드는 로봇 작업 단계를 순차적으로 수행합니다.
+- 작업 결과를 액션 응답으로 반환해 상위 흐름 제어에 활용합니다.
+
+### 7-4. Recovery Flow
+
+- 긴급 정지 및 HOME 복귀 흐름을 지원합니다.
+- 작업 실패 시 결과 상태를 상위 노드와 UI에 반환합니다.
+
+---
+
+## 8. 설치 및 빌드
+
+### 8-1. ROS 2 환경 로드
 
 ```bash
 source /opt/ros/humble/setup.bash
 ```
 
-### 7-2. 워크스페이스 생성
+### 8-2. 워크스페이스 생성
 
 ```bash
 mkdir -p ~/ros2_ws/src
 cd ~/ros2_ws/src
 ```
 
-### 7-3. Doosan ROS 2 패키지 설치
+### 8-3. Doosan ROS 2 패키지 설치
 
 ```bash
 git clone -b humble https://github.com/DoosanRobotics/doosan-robot2.git
 ```
 
-### 7-4. 이 프로젝트 클론
+### 8-4. 이 프로젝트 클론
 
 ```bash
 cd ~/ros2_ws/src
 git clone <이 저장소 주소>
 ```
 
-### 7-5. Python 의존성 설치
+### 8-5. Python 의존성 설치
 
 ```bash
 cd ~/ros2_ws/src/bio-transport-automation
 pip install -r requirements.txt
 ```
 
-### 7-6. 빌드
+### 8-6. 빌드
 
 중요: 실제 ROS 2 패키지는 저장소 내부의 `src/` 폴더에 있습니다. 따라서 `colcon build` 실행 시 패키지 경로를 명시합니다.
 
 ```bash
 cd ~/ros2_ws
 rosdep install -r --from-paths src --ignore-src --rosdistro humble -y
-colcon build --symlink-install --base-paths src/bio-transport-automation/src src/doosan-robot2
+
+colcon build --symlink-install \
+  --base-paths src/bio-transport-automation/src src/doosan-robot2
+
 source install/setup.bash
 ```
 
 ---
 
-## 8. 실행 방법
+## 9. 실행 방법
 
-### 8-1. 통합 실행
+### 9-1. 통합 실행
 
 기본값은 가상 모드입니다.
 
@@ -210,7 +241,7 @@ ros2 launch bio_transport bio_integrated.launch.py \
 
 > 실제 로봇 IP는 현장 네트워크 설정에 맞게 변경해야 합니다.
 
-### 8-2. 개별 노드 실행
+### 9-2. 개별 노드 실행
 
 ```bash
 ros2 run bio_transport bio_sub --ros-args -p dry_run:=true
@@ -220,7 +251,7 @@ ros2 run bio_transport bio_ui
 
 ---
 
-## 9. 명령 형식
+## 10. 명령 형식
 
 ### RACK 명령
 
@@ -255,17 +286,18 @@ EMERGENCY,STOP,NONE,NONE
 
 ---
 
-## 10. 문서 및 자료
+## 11. 문서 및 자료
 
 - 시스템 흐름도: `docs/Flow_chart.png`
-- 발표자료, 대용량 보관 자료: `docs/archive/`
+- 발표자료 및 보관 자료: `docs/archive/`
 
 ---
 
-## 11. 주의사항
+## 12. 주의사항
 
 - `doosan-robot2`는 이 저장소에 포함하지 않습니다.
 - `doosan-robot2`는 같은 ROS 2 워크스페이스에 외부 의존성으로 설치해야 합니다.
 - `bio_integrated.launch.py`는 `dsr_bringup2`를 사용합니다.
 - `bio_sub`는 Doosan Robot Python API 사용을 전제로 합니다.
 - 실제 로봇 모드에서는 로봇 IP, 네트워크 연결, 안전 설정을 현장 환경에 맞게 확인해야 합니다.
+```

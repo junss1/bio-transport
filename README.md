@@ -40,6 +40,7 @@ bio-transport-automation/
 ├── .gitignore
 ├── docs/
 │   ├── Flow_chart.png
+│   ├── bio-transport-automation.png
 │   └── archive/
 └── src/
     ├── bio_transport/

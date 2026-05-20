@@ -90,7 +90,7 @@ bio-transport/
     └── doosan-robot2/
 ```
 
-> 참고: `bio_transport` 패키지는 런치 파일에서 `dsr_bringup2` 패키지를 찾습니다. 따라서 `doosan-robot2`가 같은 ROS 2 워크스페이스에 설치되어 있어야 합니다.
+> 참고: `bio_transport` 패키지는 런치 파일에서 `dsr_bringup2` 패키지를 찾습니다. 따라서 `doosan-robot2`가 프로젝트 루트의 `src/` 폴더에 설치되어 있어야 합니다.
 
 ---
 
@@ -184,12 +184,11 @@ cd bio-transport
 
 ### 8-3. Doosan ROS 2 패키지 설치
 
-`doosan-robot2`는 이 저장소에 포함하지 않고, 실행 환경에서 외부 의존성으로 설치합니다.
+`doosan-robot2`는 이 저장소에 포함하지 않습니다.  
+실행 환경에서는 `bio-transport/src/` 안에 외부 의존성으로 별도 설치합니다.
 
 ```bash
-cd src
-git clone -b humble https://github.com/DoosanRobotics/doosan-robot2.git
-cd ..
+git clone -b humble https://github.com/DoosanRobotics/doosan-robot2.git src/doosan-robot2
 ```
 
 ### 8-4. Python 의존성 설치
@@ -300,15 +299,15 @@ EMERGENCY,STOP,NONE,NONE
 ## 12. 주의사항
 
 - `doosan-robot2`는 이 저장소에 포함하지 않습니다.
-- `doosan-robot2`는 같은 ROS 2 워크스페이스에 외부 의존성으로 설치해야 합니다.
+- `doosan-robot2`는 프로젝트 루트의 `src/` 폴더에 외부 의존성으로 설치해야 합니다.
 - `bio_integrated.launch.py`는 `dsr_bringup2`를 사용합니다.
 - `bio_sub`는 Doosan Robot Python API 사용을 전제로 합니다.
 - 실제 로봇 모드에서는 로봇 IP, 네트워크 연결, 안전 설정을 현장 환경에 맞게 확인해야 합니다.
-```
+
 
 
 ---
 
-## License
+## 라이선스
 
 This project is licensed under the Apache License 2.0.

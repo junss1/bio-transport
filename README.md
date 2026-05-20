@@ -1,5 +1,7 @@
 # bio-transport-automation
 
+[![Demo Video](docs/bio-transport-automation.png)](https://youtu.be/qSOLFy9Ex48)
+
 바이오뱅크 워크셀에서 **랙(RACK) 이송**과 **튜브(TUBE) 이송**을 ROS 2 Action 기반으로 통합 제어하는 프로젝트입니다.
 
 이 저장소는 프로젝트 소스만 포함합니다. **Doosan ROS 2 패키지(`doosan-robot2`)는 저장소에 포함하지 않고 외부 의존성으로 설치합니다.**

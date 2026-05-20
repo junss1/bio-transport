@@ -1,0 +1,12 @@
+string job_id
+float64[6] pick_posx
+float64[6] place_posx
+---
+bool success
+string error_code
+string message
+---
+string stage
+float32 progress
+string detail
+

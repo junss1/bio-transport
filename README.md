@@ -34,7 +34,7 @@
 ## 3. 저장소 구조
 
 ```text
-bio-transport-automation/
+bio-transport/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
@@ -74,7 +74,7 @@ git clone -b humble https://github.com/DoosanRobotics/doosan-robot2.git
 ```text
 ros2_ws/
 └── src/
-    ├── bio-transport-automation/
+    ├── bio-transport/
     │   ├── docs/
     │   └── src/
     │       ├── bio_transport/
@@ -184,7 +184,7 @@ git clone -b humble https://github.com/DoosanRobotics/doosan-robot2.git
 
 ```bash
 cd ~/ros2_ws/src
-git clone <이 저장소 주소>
+git clone https://github.com/junss1/bio-transport.git
 ```
 
 ### 8-5. Python 의존성 설치
@@ -203,7 +203,7 @@ cd ~/ros2_ws
 rosdep install -r --from-paths src --ignore-src --rosdistro humble -y
 
 colcon build --symlink-install \
-  --base-paths src/bio-transport-automation/src src/doosan-robot2
+  --base-paths src/bio-transport/src src/doosan-robot2
 
 source install/setup.bash
 ```

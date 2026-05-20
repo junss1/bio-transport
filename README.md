@@ -1,8 +1,8 @@
-# bio-transport-automation
+# 바이오뱅크 검체 이송 관리 자동화 시스템
+
 
 [![Demo Video](docs/bio-transport-automation.png)](https://youtu.be/qSOLFy9Ex48)
-
-이미지 클릭 시 데모 영상을 확인할 수 있습니다.
+↑ 이미지 클릭 시 데모 영상을 확인할 수 있습니다.
 
 바이오뱅크 워크셀에서 **랙(RACK) 이송**과 **튜브(TUBE) 이송**을 ROS 2 Action 기반으로 통합 제어하는 프로젝트입니다.
 

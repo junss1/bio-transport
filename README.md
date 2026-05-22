@@ -130,6 +130,7 @@ ROS 2 Action 정의 패키지입니다.
 
 ## 6. 시스템 FLOW
 ![Flow](docs/Flow_chart.png)
+<img src="docs/biobank_ui.png" width="70%"/>
 1. UI에서 작업 명령을 입력합니다.
 2. `bio_main`이 명령 타입을 판별하고 유효성을 검사합니다.
 3. 스테이션 이름을 실제 접근 좌표와 작업 좌표로 변환합니다.
